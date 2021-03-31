@@ -9,4 +9,3 @@ const Item = require('../models/item');
     res.render('items/index', { title: 'All items', items });
   });
 }
-
