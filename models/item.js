@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const itemSchema = new Schema({
-  name:String,
-  lender:String,
-  borrower:String,
+  name: String,
+  lender: {type: Schema.Types.ObjectId, ref: 'User'},
+  borrower: borrowerSchema,
   condition: String,
-  timeframe:Date,
 }, {
   timestamps: true
 });
