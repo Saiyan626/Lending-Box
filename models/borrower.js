@@ -8,4 +8,4 @@ const borrowerSchema = new Schema({
   timestamps: true
 });
 
-const Borrower = mongoose.model('Borrower', borrowerSchema);
+module.exports = mongoose.model('Borrower', borrowerSchema);
