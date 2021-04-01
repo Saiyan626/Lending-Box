@@ -6,14 +6,13 @@
       <div>Description: <%= item.name %></div> 
       <div>Condition: <%= item.condition %></div> 
     </div>
-    </form>
     <form action="/items/<%= item._id %>?_method=DELETE" method="POST">
-      <button type="submit">REMOVE BORROWED ITEM</button>
+      <button type="submit">REMOVE LOANED ITEM</button>
     </form>
 
   <% }); %>
 <% } else { %>
-  <h3> You have no borrowed items </h3>
+  <h3> You have no loaned items. </h3>
 <% } %>
 
 

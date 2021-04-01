@@ -6,8 +6,16 @@ const Item = require('../models/item');
   create,
   borrowed,
   borrow,
-  delete:deleteItem
+  delete:deleteItem,
+  loaned,
+  update
 };
+
+function loaned(req, res) {
+    Item.find({'loaned.user': req.user._id }, function(err, items) {
+        res.render('items/loaned', { title: 'My Loaned Items', items });
+    });
+}
 
 function deleteItem(req, res) {
   // Note the cool "dot" syntax to query on the property of a subdoc
@@ -35,6 +43,7 @@ function borrow(req, res) {
         })
     });
 }
+
 
 function borrowed(req, res) {
     Item.find({'borrower.user': req.user._id }, function(err, items) {
