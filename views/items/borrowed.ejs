@@ -7,8 +7,8 @@
       <div>Condition: <%= item.condition %></div> 
     </div>
     </form>
-    <form action="/items/<%= item._id %>?_method=DELETE" method="POST">
-      <button type="submit">REMOVE BORROWED ITEM</button>
+    <form action="/items/<%= item._id %>/unborrow?_method=PUT" method="POST">
+      <button type="submit">STOP BORROWING ITEM</button>
     </form>
 
   <% }); %>

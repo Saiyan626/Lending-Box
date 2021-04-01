@@ -12,5 +12,7 @@ router.post('/', isLoggedIn, itemsCtrl.create);
 router.post('/:id/borrow', isLoggedIn, itemsCtrl.borrow);
 router.delete('/:id', isLoggedIn, itemsCtrl.delete);
 router.put('/loaned/:id', isLoggedIn, itemsCtrl.update);
+router.put('/:id/unborrow', isLoggedIn, itemsCtrl.unborrow);
+
 
 module.exports = router;

@@ -8,8 +8,18 @@ const Item = require('../models/item');
   borrow,
   delete:deleteItem,
   loaned,
-  update
+  update,
+  unborrow
 };
+
+function unborrow(req, res) {
+  Item.findById(req.params.id, function(err, item) {
+    item.borrower = undefined;
+    item.save(function(err) {
+      res.redirect(`/items/borrowed`);
+    });
+  });
+}
 
 function update(req, res) {
     Items.findById(req.params.id, function(err, toy) {
