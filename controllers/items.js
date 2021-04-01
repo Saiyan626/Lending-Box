@@ -5,8 +5,27 @@ const Item = require('../models/item');
   new: newItem,
   create,
   borrowed,
-  borrow
+  borrow,
+  delete:deleteItem
 };
+
+function deleteItem(req, res) {
+  // Note the cool "dot" syntax to query on the property of a subdoc
+  Index.findOne(
+    {'items._id': req.params.id, 'items.userId': req.user._id},
+    function(err, index) {
+      if (!index || err) return res.redirect(`items/${index._id}`);
+      // Remove the subdoc (https://mongoosejs.com/docs/subdocs.html)
+      index.items.remove(req.params.id);
+      // Save the updated index
+      index.save(function(err) {
+        // Redirect back to the index's show view
+        res.redirect(`items/${index._id}`);
+      });
+    }
+  );
+}
+
 
 function borrow(req, res) {
     Item.findById(req.params.id, function(err, item) {

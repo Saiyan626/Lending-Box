@@ -9,6 +9,6 @@ router.get('/borrowed', isLoggedIn, itemsCtrl.borrowed);
 router.get('/new', isLoggedIn, itemsCtrl.new);
 router.post('/', isLoggedIn, itemsCtrl.create);
 router.post('/:id/borrow', isLoggedIn, itemsCtrl.borrow);
-
+router.delete('/:id', isLoggedIn, itemsCtrl.delete);
 
 module.exports = router;

@@ -7,6 +7,9 @@
     <form action="/items/<%= item._id %>/borrow" method="POST">
       <button type="submit">BORROW</button>
     </form>
+    <form action="/items/<%= item._id %>?_method=DELETE" method="POST">
+      <button type="submit">REMOVE LOAN</button>
+    </form>
   </div>
 <% }); %>
 
