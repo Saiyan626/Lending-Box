@@ -27,15 +27,10 @@ function loaned(req, res) {
 }
 
 function deleteItem(req, res) {
-  // Note the cool "dot" syntax to query on the property of a subdoc
-  Index.findOne(
-    {'items._id': req.params.id, 'items.userId': req.user._id},
-    function(err, index) {
-      if (!index || err) return res.redirect(`items/${index._id}`);
-      index.items.remove(req.params.id);
-      index.save(function(err) {
-        res.redirect(`items/${index._id}`);
-      });
+  Item.findOneAndDelete(   
+    {_id: req.params.id, lender: req.user._id},    
+    function(err) {
+      res.redirect(`/items`);   
     }
   );
 }
