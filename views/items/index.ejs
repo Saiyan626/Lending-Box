@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Lending-Box</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Lending-Box</h1>
-  </body>
-</html>
+<%- include('../partials/header') %>
+
+<% items.forEach(function(item) { %>
+  <div>
+    <div>Description: <%= item.name %></div> 
+    <div>Condition: <%= item.condition %></div> 
+    <form action="/items/<%= item._id %>/borrow" method="POST">
+      <button type="submit">BORROW</button>
+    </form>
+  </div>
+<% }); %>
+
+<%- include('../partials/footer') %>

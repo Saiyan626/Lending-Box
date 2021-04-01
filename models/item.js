@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const WEEK = 7 * 24 * 60 * 60 * 1000;
 
 const borrowerSchema = new Schema({
-    Name: {type: Schema.Types.ObjectId, ref: 'User'},
-
+    user: {type: Schema.Types.ObjectId, ref: 'User'},
+    dueDate: {
+      type: Date, 
+      default: function () {
+        return new Date(Date.now() + WEEK);
+      }
+    }
 },{
   timestamps: true
 });

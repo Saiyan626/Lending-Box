@@ -2,10 +2,45 @@ const Item = require('../models/item');
  
  module.exports = {
   index,
+  new: newItem,
+  create,
+  borrowed,
+  borrow
 };
 
- function index(req, res) {
-  Item.find({}, function(err, items) {
-    res.render('items/index', { title: 'All items', items });
+function borrow(req, res) {
+    Item.findById(req.params.id, function(err, item) {
+        item.borrower = {user: req.user._id};
+        item.save(function(err) {
+            res.redirect('/items/borrowed');    
+        })
+    });
+}
+
+function borrowed(req, res) {
+    Item.find({'borrower.user': req.user._id }, function(err, items) {
+        res.render('items/borrowed', { title: 'My Borrowed Items', items });
+    });
+}
+
+function create(req, res) {
+    const item = new Item(req.body);
+    item.lender = req.user._id;
+    item.save(function(err) {
+        if(err) return res.render('items/new', { title: 'Add Item'});
+        res.redirect('/items');
+    });
+}
+
+//display ALL available items. (not borrowed)
+function index(req, res) {
+  Item.find({borrower: undefined}, function(err, items) {
+    res.render('items/index', { title: 'Available Items', items });
   });
 }
+
+function newItem(req, res) {
+    res.render('items/new', { title: 'Add Item'});
+}
+
+

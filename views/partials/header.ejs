@@ -10,13 +10,17 @@
 <body>
   <nav>
     <img src="">
-    <a href="/" <%- title === 'All Items' ? 'class="active"' : '' %>>ALL ITEMS</a>
+      <a href="/" <%- title === 'Welcome to Lending Box' ? 'class="active"' : '' %>>HOME</a>
     <% if (user) { %>
-      <a href="//new"	<%- title === 'Add ' ? 'class="active"' : '' %>>
-      ADD PERFORMER</a>
-      <a href="//new" <%- title === 'Add Items' ? 'class="active"' : '' %>>ADD ITEMS</a>
+      <a href="/items" <%- title === 'Available Items' ? 'class="active"' : '' %>>AVAILABLE ITEMS</a>
+      <a href="/items/new"	<%- title === 'Add Item' ? 'class="active"' : '' %>>
+      ADD ITEM</a>
+      <a href="/items/loaned" <%- title === 'My Loaned Items' ? 'class="active"' : '' %>>MY LOANED ITEMS</a>
+      <a href="/items/borrowed" <%- title === 'My Borrowed Items' ? 'class="active"' : '' %>>MY BORROWED ITEMS</a>
       <a href="/logout">LOG OUT</a>
     <% } else { %>
       <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
     <% } %>
   </nav>
+
+  <h1><%= title %></h1> 

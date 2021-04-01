@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+<% if  (items.length) { %>
+  <% items.forEach(function(item) { %>
+    <div>
+      <div>Description: <%= item.name %></div> 
+      <div>Condition: <%= item.condition %></div> 
+    </div>
+  <% }); %>
+<% } else { %>
+  <h3> You have no borrowed items </h3>
+<% } %>
+
+
+<%- include('../partials/footer') %>
