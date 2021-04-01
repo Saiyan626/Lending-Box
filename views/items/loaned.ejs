@@ -1,19 +1,25 @@
 <%- include('../partials/header') %>
 
-<% if  (items.length) { %>
   <% items.forEach(function(item) { %>
-    <div>
-      <div>Description: <%= item.name %></div> 
-      <div>Condition: <%= item.condition %></div> 
+    <div class="item">
+      <div>Description: <%= item.name %></div>
+      <div>Condition: <%= item.condition %></div>
+      <div>Borrower: <%= item.borrower ? item.borrower.user.name : "Available" %></div>
+      <% if (item.borrower) { %>
+        <div>Due Date: <%= item.borrower.dueDate.toLocaleDateString() %></div>
+      <% } %>
+      <% if (!item.lender.equals(user._id)) { %>
+        <form action="/items/<%= item._id %>/borrow" method="POST">
+          <button type="submit">BORROW</button>
+        </form>
+        <% } %>
+
+          <% if (item.lender.equals(user._id)) { %>
+            <form action="/items/<%= item._id %>?_method=DELETE" method="POST">
+              <button type="submit">REMOVE LOAN</button>
+            </form>
+            <% } %>
     </div>
-    <form action="/items/<%= item._id %>?_method=DELETE" method="POST">
-      <button type="submit">REMOVE LOANED ITEM</button>
-    </form>
-
   <% }); %>
-<% } else { %>
-  <h3> You have no loaned items. </h3>
-<% } %>
-
 
 <%- include('../partials/footer') %>

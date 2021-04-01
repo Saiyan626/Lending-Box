@@ -2,14 +2,13 @@
 
 <% if  (items.length) { %>
   <% items.forEach(function(item) { %>
-    <div>
+    <div class="item">
       <div>Description: <%= item.name %></div> 
       <div>Condition: <%= item.condition %></div> 
+      <form action="/items/<%= item._id %>/unborrow?_method=PUT" method="POST">
+        <button type="submit">STOP BORROWING ITEM</button>
+      </form>
     </div>
-    </form>
-    <form action="/items/<%= item._id %>/unborrow?_method=PUT" method="POST">
-      <button type="submit">STOP BORROWING ITEM</button>
-    </form>
 
   <% }); %>
 <% } else { %>

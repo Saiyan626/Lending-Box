@@ -12,6 +12,7 @@ const Item = require('../models/item');
   unborrow
 };
 
+
 function unborrow(req, res) {
   Item.findById(req.params.id, function(err, item) {
     item.borrower = undefined;
@@ -31,8 +32,11 @@ function update(req, res) {
 }
 
 function loaned(req, res) {
-    Item.find({'loaned.user': req.user._id }, function(err, items) {
-        res.render('items/loaned', { title: 'My Loaned Items', items });
+    Item.find({lender: req.user._id})
+    .populate('borrower.user')
+    .sort('-createdAt') 
+    .exec(function(err, items) {
+      res.render('items/loaned', { title: 'My Loaned Items', items });
     });
 }
 
@@ -73,9 +77,13 @@ function create(req, res) {
 
 //display ALL available items. (not borrowed)
 function index(req, res) {
-  Item.find({borrower: undefined}, function(err, items) {
-    res.render('items/index', { title: 'Available Items', items });
-  });
+  Item.find({borrower: undefined})
+    .populate('borrower.user')
+    .populate('lender')
+    .sort('-createdAt') 
+    .exec(function(err, items) {
+      res.render('items/index', { title: 'Available Items', items });
+    });
 }
 
 function newItem(req, res) {

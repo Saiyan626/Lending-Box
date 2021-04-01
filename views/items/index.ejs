@@ -1,19 +1,24 @@
 <%- include('../partials/header') %>
 
-<% items.forEach(function(item) { %>
-  <div>
-    <div>Description: <%= item.name %></div> 
-    <div>Condition: <%= item.condition %></div> 
-    <form action="/items/<%= item._id %>/borrow" method="POST">
-      <button type="submit">BORROW</button>
-    </form>
-    <% if (item.lender.equals(user._id)) { %>
-      <form action="/items/<%= item._id %>?_method=DELETE" method="POST">
-        <button type="submit">REMOVE LOAN</button>
-      </form>
-    <% } %>
-  </div>
-<% }); %>
+  <% items.forEach(function(item) { %>
+    <div class="item">
+      <div>Description: <%= item.name %></div>
+      <div>Condition: <%= item.condition %></div>
+      <div>Lender: <%= item.lender.name %></div>
+      
+
+      <% if (!item.lender.equals(user._id)) { %>
+        <form action="/items/<%= item._id %>/borrow" method="POST">
+          <button type="submit">BORROW</button>
+        </form>
+        <% } %>
+
+          <% if (item.lender.equals(user._id)) { %>
+            <form action="/items/<%= item._id %>?_method=DELETE" method="POST">
+              <button type="submit">REMOVE LOAN</button>
+            </form>
+            <% } %>
+    </div>
+  <% }); %>
 
 <%- include('../partials/footer') %>
-
