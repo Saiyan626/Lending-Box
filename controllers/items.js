@@ -11,6 +11,15 @@ const Item = require('../models/item');
   update
 };
 
+function update(req, res) {
+    Items.findById(req.params.id, function(err, toy) {
+        Object.assign(items, req.body);
+        items.save(function(err) {
+            res.redirect(`/items/${req.params.id}`);
+        })
+    })
+}
+
 function loaned(req, res) {
     Item.find({'loaned.user': req.user._id }, function(err, items) {
         res.render('items/loaned', { title: 'My Loaned Items', items });
@@ -23,11 +32,8 @@ function deleteItem(req, res) {
     {'items._id': req.params.id, 'items.userId': req.user._id},
     function(err, index) {
       if (!index || err) return res.redirect(`items/${index._id}`);
-      // Remove the subdoc (https://mongoosejs.com/docs/subdocs.html)
       index.items.remove(req.params.id);
-      // Save the updated index
       index.save(function(err) {
-        // Redirect back to the index's show view
         res.redirect(`items/${index._id}`);
       });
     }
