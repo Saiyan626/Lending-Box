@@ -2,7 +2,9 @@
 * **_Lending Box_** is a place to share the items you need but would rather not buy for those special one of a kind moments. From borrowing Tents and Folding Chairs for family outings, Step Ladders to hang the Christmas lights or Cookware for that special dish you only make once a year.
 
 #  Screenshots: 
-
+![Available Item page](https://i.imgur.com/oR90ndG.png)
+![Add Items page](https://i.imgur.com/De09FW8.png)
+![Loaned Items](https://i.imgur.com/Y0DWWEX.png)
 
 ##  Technologies Used:
 * HTML5
