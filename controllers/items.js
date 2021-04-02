@@ -23,7 +23,7 @@ function unborrow(req, res) {
 }
 
 function update(req, res) {
-    Items.findById(req.params.id, function(err, toy) {
+    Items.findById(req.params.id, function(err, item) {
         Object.assign(items, req.body);
         items.save(function(err) {
             res.redirect(`/items/${req.params.id}`);
