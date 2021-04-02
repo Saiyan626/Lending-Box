@@ -23,6 +23,6 @@
 #### [Trello Planning Board](https://trello.com/b/0JtYIJDo/project-ii-lendingbox)
 
 ## Next Steps
-*Add a list of items to the homepage viewable by signed out users but only available to users after log in.
-*Add an EDIT ITEM button to update an item's description and condition.
-*Add a dropdown list of predefined conditions to select from
+* Add a list of items to the homepage viewable by signed out users but only available to users after log in.
+* Add an EDIT ITEM button to update an item's description and condition.
+* Add a dropdown list of predefined conditions to select from
